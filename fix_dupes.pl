@@ -53,15 +53,15 @@ my %files_by_hash;
 my $parsed = 0;
 
 sub parse_dir {
-	my ( $dir, $saved ) = @_;
-	
+    my ( $dir, $saved ) = @_;
+    
     $saved //= 0;
 
-	opendir my( $dh ), $dir;
-	
-	while ( my $dir_entry = readdir $dh ) {
-		next if $dir_entry =~ m{^[.]};
-		
+    opendir my( $dh ), $dir;
+    
+    while ( my $dir_entry = readdir $dh ) {
+        next if $dir_entry =~ m{^[.]};
+        
         foreach my $entry ( <"$dir/$dir_entry/*"> ) {
             if ( -d $entry ) {
                 parse_dir( $entry, $saved );
@@ -105,7 +105,7 @@ sub parse_dir {
                 $files_by_hash{ $md5 } = $hash;
             }
         }
-	}
+    }
 
     return $saved;
 }
